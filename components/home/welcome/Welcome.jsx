@@ -1,14 +1,84 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import { React, useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  FlatList,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import styles from './welcome.style';
+import { icons, SIZES } from '../../../constants';
 
-import styles from './welcome.style'
+const jobTypes = [
+  'Full Time',
+  'Part Time',
+  'Contract',
+  // 'Freelance',
+  // 'Internship',
+  // 'Apprenticeship',
+  // 'Temporary',
+  // 'Remote',
+  // 'In Person',
+  // 'Commission',
+  // 'Volunteer',
+  // 'Other',
+];
 
 const Welcome = () => {
+  const router = useRouter();
+  const [activeJobType, setActiveJobType] = useState(jobTypes[0]);
+
   return (
     <View>
-      <Text>Welcome</Text>
-    </View>
-  )
-}
+      <View style={styles.container}>
+        <Text style={styles.userName}>Hello Name</Text>
+        <Text style={styles.welcomeMessage}>
+          Find the job you're looking for
+        </Text>
+      </View>
+      <View style={styles.searchContainer}>
+        <View style={styles.searchWrapper}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search for jobs"
+            value=""
+            placeholderTextColor="#000"
+            onChange={() => {}}
+          />
+        </View>
+        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+          <Image
+            source={icons.search}
+            resizeMode="contain"
+            style={styles.searchBtnImage}
+          />
+        </TouchableOpacity>
+      </View>
 
-export default Welcome
+      <View style={styles.tabsContainer}>
+        <FlatList
+          data={jobTypes}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.tab(activeJobType, item)}
+              onPress={() => {
+                setActiveJobType(item);
+                router.push('/search/${item}');
+              }}
+            >
+              <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
+            </TouchableOpacity>
+          )}
+          //Used to extract a unique key for a given item at the specified index.
+          keyExtractor={(item) => item}
+          contentContainerStyle={{ columnGap: SIZES.small }}
+          horizontal
+        />
+      </View>
+    </View>
+  );
+};
+
+export default Welcome;
