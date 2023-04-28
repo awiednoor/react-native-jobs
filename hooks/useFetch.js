@@ -11,35 +11,44 @@ export default useFetch = (endPoint, query) => {
 
   const options = {
     method: 'GET',
-    //dynamic url to use the useFetch hook for multiple endpoints
     url: `https://jsearch.p.rapidapi.com/${endPoint}`,
-    headers: {
-      'content-type': 'application/octet-stream',
-      'X-RapidAPI-Key': rapidApiKey,
-      'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
+    config: {
+      headers: {
+        'content-type': 'application/octet-stream',
+        'X-RapidAPI-Key': rapidApiKey,
+        'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
+      },
+      params: { ...query },
     },
-    params: { ...query },
   };
+
+  console.log(options);
 
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.request(options);
-      setData(response.data.data);
+      axios
+        .get(options.url, options.config)
+        .then(function (response) {
+          setData(response.data.data);
+        })
+        .catch(function (error) {
+          setError(error);
+        });
       setIsLoading(false);
     } catch (error) {
       setError(error);
-      alert(
-        "Sorry, we couldn't find any jobs for you. Please try again later."
-      );
+      alert("Couldn't find any jobs");
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  //return the data if needed
+  //refetch the data if needed
   const refetch = () => {
     setIsLoading(true);
     fetchData();
