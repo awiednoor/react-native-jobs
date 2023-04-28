@@ -42,10 +42,10 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
+            onChange={() => {}}
             placeholder="Search for jobs"
             value=""
             placeholderTextColor="#000"
-            onChange={() => {}}
           />
         </View>
         <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
@@ -60,6 +60,8 @@ const Welcome = () => {
       <View style={styles.tabsContainer}>
         <FlatList
           data={jobTypes}
+          //Used to extract a unique key for a given item at the specified index.
+          keyExtractor={(item) => item}
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.tab(activeJobType, item)}
@@ -71,8 +73,6 @@ const Welcome = () => {
               <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
             </TouchableOpacity>
           )}
-          //Used to extract a unique key for a given item at the specified index.
-          keyExtractor={(item) => item}
           contentContainerStyle={{ columnGap: SIZES.small }}
           horizontal
         />
