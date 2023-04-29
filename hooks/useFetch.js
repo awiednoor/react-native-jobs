@@ -22,8 +22,6 @@ export default useFetch = (endPoint, query) => {
     },
   };
 
-  console.log(options);
-
   const fetchData = async () => {
     setIsLoading(true);
     try {
