@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Rapid_API_Key } from '@env';
-
+import { palceholderData } from '../palceholderData.js';
 const rapidApiKey = Rapid_API_Key;
 
 export default useFetch = (endPoint, query) => {
@@ -24,21 +24,29 @@ export default useFetch = (endPoint, query) => {
 
   const fetchData = async () => {
     setIsLoading(true);
+    // try {
+    //   axios
+    //     .get(options.url, options.config)
+    //     .then(function (response) {
+    //       setData(response.data.data);
+    //     })
+    //     .catch(function (error) {
+    //       setError(error);
+    //     });
+    //   setIsLoading(false);
+    // } catch (error) {
+    //   setError(error);
+    //   alert("Couldn't find any jobs");
+    // } finally {
+    //   setIsLoading(false);
+    // }
+
     try {
-      axios
-        .get(options.url, options.config)
-        .then(function (response) {
-          setData(response.data.data);
-        })
-        .catch(function (error) {
-          setError(error);
-        });
+      setData(palceholderData.data);
       setIsLoading(false);
     } catch (error) {
       setError(error);
       alert("Couldn't find any jobs");
-    } finally {
-      setIsLoading(false);
     }
   };
 
