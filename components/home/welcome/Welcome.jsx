@@ -33,7 +33,7 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello Name</Text>
+        <Text style={styles.userName}>Hello Noor</Text>
         <Text style={styles.welcomeMessage}>
           Find the job you're looking for
         </Text>
