@@ -6,11 +6,13 @@ React Native Jobs is a mobile application that allows users to search for jobs u
 
 https://expo.dev/@n00r/react-native-jobs?serviceType=classic&distribution=expo-go
 
+<p float="left">
 <img src='./assets/images/home.jpeg' width="150"/> 
 <img src='./assets/images/home_2.jpeg' width="150"/> 
 <img src='./assets/images/job_about.jpeg' width="150"/> 
 <img src='./assets/images/job_qualifications.jpeg' width="150"/> 
 <img src='./assets/images/job_responsibilities.jpeg' width="150"/>
+</p>
 
 # Table of Contents
 
